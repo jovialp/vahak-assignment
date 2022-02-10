@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./text.module.scss";
 
 const Text = (props: any) => {
-  const { name, label, onChange, defaultValue, required } = props;
-  let [value, setValue] = useState("");
-  if (defaultValue) value = defaultValue;
+  const { name, label, onChange, defaultValue, required, errorMessage } = props;
+  const [value, setValue] = useState("");
+
+  useEffect(() => {
+    if (defaultValue || defaultValue === "") {
+      setValue(defaultValue || "");
+    }
+  }, [defaultValue]);
 
   return (
     <div className={styles["textContainer"]}>
@@ -25,6 +30,9 @@ const Text = (props: any) => {
           className={styles["textInput"]}
         />
       </div>
+      {errorMessage && (
+        <div className={styles["errorMessage"]}>{errorMessage || ""}</div>
+      )}
     </div>
   );
 };

@@ -1,6 +1,14 @@
 import styles from "./select.module.scss";
 const Select = (props: any) => {
-  const { name, label, options, onChange, defaultValue, required } = props;
+  const {
+    name,
+    label,
+    options,
+    onChange,
+    defaultValue,
+    required,
+    errorMessage,
+  } = props;
   return (
     <div className={styles["textContainer"]}>
       <div className={styles["textWrap"]}>
@@ -25,6 +33,9 @@ const Select = (props: any) => {
           })}
         </select>
       </div>
+      {errorMessage && (
+        <div className={styles["errorMessage"]}>{errorMessage || ""}</div>
+      )}
     </div>
   );
 };

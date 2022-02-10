@@ -1,5 +1,6 @@
 .textContainer {
   display: block;
+
   .textWrap {
     position: relative;
     text-align: left;
@@ -31,5 +32,12 @@
         border-color: #2468fa;
       }
     }
+  }
+
+  .errorMessage {
+    text-align: left;
+    font-size: 12px;
+    color: red;
+    margin-left: 10px;
   }
 }

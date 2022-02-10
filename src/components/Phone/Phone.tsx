@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./phone.module.scss";
+import whatsapp from "../../assets/whatsapp.png";
+import Checkbox from "../Checkbox/Checkbox";
 
 const Phone = (props: any) => {
-  const { name, label, onChange, defaultValue, required } = props;
-  let [value, setValue] = useState("");
-  if (defaultValue) value = defaultValue;
+  const { name, label, onChange, defaultValue, required, errorMessage } = props;
+  const [value, setValue] = useState<string>("");
+
+  useEffect(() => {
+    if (defaultValue || defaultValue === "") {
+      setValue(defaultValue || "");
+    }
+  }, [defaultValue]);
 
   return (
     <div className={styles["textContainer"]}>
@@ -14,7 +21,7 @@ const Phone = (props: any) => {
           {label} {required ? "*" : ""}
         </span>
 
-        {value && <span className={styles["textCode"]}>+91 - </span>}
+        <span className={styles["textCode"]}>+91 - </span>
         <input
           id={name}
           name={name}
@@ -32,7 +39,18 @@ const Phone = (props: any) => {
           value={value}
           className={styles["textInput"]}
         />
+
+        <div className={styles["updateSection"]}>
+          <Checkbox name={"getUpdate"} label={"Get Updates on"} />{" "}
+          <span>
+            <img src={whatsapp} alt="whatsapp" />
+            Whatsapp
+          </span>
+        </div>
       </div>
+      {errorMessage && (
+        <div className={styles["errorMessage"]}>{errorMessage || ""}</div>
+      )}
     </div>
   );
 };

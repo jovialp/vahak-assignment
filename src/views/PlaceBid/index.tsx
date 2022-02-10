@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { Form, Formik } from "formik";
+import { Form, Formik, FormikProps } from "formik";
+import * as Yup from "yup";
+
 import Step from "../../components/Step/Step";
-import StepOne from "./innerComponents/StepOne";
-import StepTwo from "./innerComponents/StepTwo";
-import StepThree from "./innerComponents/StepThree";
-import StepFour from "./innerComponents/StepFour";
-import BidDetails from "./innerComponents/BidDetails";
+
+import JourneyFields from "./JourneyFields";
+import BidFields from "./BidFields";
+import VerifyOtp from "./VerifyOtp";
+import SubmitBid from "./SubmitBid";
+import BidDetails from "./PlaceBidDetails";
 
 export interface IBidData {
   source: string;
@@ -20,19 +23,32 @@ export interface IBidData {
   remarks?: string;
 }
 
+const journeyFieldsSchema = Yup.object().shape({
+  source: Yup.string().required(`Source Location is Required`),
+  destination: Yup.string().required("Destination is Required"),
+  carType: Yup.string().required("Car Type is Required"),
+  personCount: Yup.string().required("Travelers is Required"),
+});
+
+const bidFieldsSchema = Yup.object().shape({
+  fullName: Yup.string().required(`Name is Required`),
+  mobileNumber: Yup.number().required(`Mobile Number is Required`),
+});
+
 const PlaceBid = () => {
   const [message, setMessage] = useState<string>("Place your Bid(1/4 step)");
+  const [validationSchema, setSchema] = useState<any>(journeyFieldsSchema);
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [bidData, setBidData] = useState<IBidData>({
     source: "",
     destination: "",
     carType: "",
-    personCount: 0,
+    personCount: undefined,
     fullName: "",
+    mobileNumber: undefined,
   });
 
   const updateBidData = (data: any) => {
-    console.log("data-->", data);
     const updatedData = {
       ...bidData,
       source: data.source || bidData.source,
@@ -56,10 +72,12 @@ const PlaceBid = () => {
   const switchStep = (step: number) => {
     switch (step) {
       case 0:
+        setSchema(journeyFieldsSchema);
         setMessage("Place your Bid(1/4 step)");
         increaseStep(step);
         break;
       case 1:
+        setSchema(bidFieldsSchema);
         setMessage("Place your Bid(2/4 step)");
         increaseStep(step);
         break;
@@ -84,11 +102,15 @@ const PlaceBid = () => {
     switchStep(step - 1);
   };
 
-  const renderCurrentSection = (step: number) => {
+  const renderCurrentSection = (
+    formik: FormikProps<IBidData>,
+    step: number
+  ) => {
     switch (step) {
       case 1:
         return (
-          <StepOne
+          <JourneyFields
+            formik={formik}
             data={bidData}
             nextStep={nextStep}
             updateBidData={updateBidData}
@@ -97,7 +119,8 @@ const PlaceBid = () => {
 
       case 2:
         return (
-          <StepTwo
+          <BidFields
+            formik={formik}
             data={bidData}
             nextStep={nextStep}
             updateBidData={updateBidData}
@@ -106,7 +129,8 @@ const PlaceBid = () => {
 
       case 3:
         return (
-          <StepThree
+          <VerifyOtp
+            formik={formik}
             data={bidData}
             nextStep={nextStep}
             updateBidData={updateBidData}
@@ -115,11 +139,12 @@ const PlaceBid = () => {
         );
 
       case 4:
-        return <StepFour nextStep={nextStep} />;
+        return <SubmitBid nextStep={nextStep} />;
 
       default:
         return (
-          <StepOne
+          <JourneyFields
+            formik={formik}
             data={bidData}
             nextStep={nextStep}
             updateBidData={updateBidData}
@@ -130,25 +155,28 @@ const PlaceBid = () => {
 
   return (
     <Formik
-      initialValues={{}}
+      initialValues={bidData}
+      validationSchema={validationSchema}
       onSubmit={(values, actions) => {
         console.log({ values, actions });
         alert(JSON.stringify(bidData, null, 2));
         actions.setSubmitting(false);
       }}
     >
-      <Form>
-        <div>
-          <Step message={message} />
-          <BidDetails
-            currentStep={currentStep}
-            gotoStep={gotoStep}
-            data={bidData}
-          />
+      {(formik) => (
+        <Form>
+          <div>
+            <Step message={message} />
+            <BidDetails
+              currentStep={currentStep}
+              gotoStep={gotoStep}
+              data={bidData}
+            />
 
-          {renderCurrentSection(currentStep)}
-        </div>
-      </Form>
+            {renderCurrentSection(formik, currentStep)}
+          </div>
+        </Form>
+      )}
     </Formik>
   );
 };
