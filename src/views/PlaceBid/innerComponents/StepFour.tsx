@@ -1,5 +1,3 @@
-import Select from "../../../components/Select/Select";
-import Text from "../../../components/Text/Text";
 import styles from "./styles.module.scss";
 
 const StepFour = (props: any) => {

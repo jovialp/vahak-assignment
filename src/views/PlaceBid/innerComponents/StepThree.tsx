@@ -8,7 +8,7 @@ interface IStepThreeProps extends IStepProps {
 }
 
 const StepThree = (props: IStepThreeProps) => {
-  const { data, nextStep, updateBidData, gotoStep } = props;
+  const { data, nextStep, gotoStep } = props;
   const { mobileNumber } = data;
 
   const [otp, setOtp] = useState<number>();
@@ -28,16 +28,15 @@ const StepThree = (props: IStepThreeProps) => {
             submit your bid{" "}
             <span className={styles["mobileNumber"]}>
               {mobileNumber}{" "}
-              <a
-                href="#"
+              <span
                 onClick={(e) => {
                   e.preventDefault();
                   gotoStep(2);
                 }}
-                style={{ textDecoration: "unset" }}
+                style={{ cursor: "pointer", color: "blue" }}
               >
                 Edit
-              </a>
+              </span>
             </span>
           </p>
         </div>
@@ -56,14 +55,14 @@ const StepThree = (props: IStepThreeProps) => {
           </div>
 
           <div className={styles["resendOtpLinkWrap"]}>
-            <a
-              href="#"
+            <span
               onClick={(e) => {
                 e.preventDefault();
               }}
+              style={{ cursor: "pointer", color: "blue" }}
             >
               Resend OTP Again
-            </a>
+            </span>
           </div>
 
           <button

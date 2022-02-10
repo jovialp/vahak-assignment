@@ -7,7 +7,7 @@ const Otp = (props: any) => {
   if (defaultValue) value = defaultValue;
 
   useEffect(() => {
-    if (defaultValue || defaultValue == "") {
+    if (defaultValue || defaultValue === "") {
       setValue(defaultValue);
     }
   }, [defaultValue]);

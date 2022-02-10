@@ -95,7 +95,7 @@ const StepOne = (props: IStepProps) => {
             onChange={(val: string) => {
               setCarType(val);
             }}
-            defaultValue={carTypeOptions.find((el) => el == carType)}
+            defaultValue={carTypeOptions.find((el) => el === carType)}
             required={true}
           />
           <Text

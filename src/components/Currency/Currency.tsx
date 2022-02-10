@@ -11,7 +11,7 @@ const Currency = (props: any) => {
   if (defaultValue) value = defaultValue;
 
   useEffect(() => {
-    if (defaultValue || defaultValue == "") {
+    if (defaultValue || defaultValue === "") {
       setValue(defaultValue);
       setWidth(`${(defaultValue.toString().length || 1) * 27}px`);
     }

@@ -27,16 +27,15 @@ const BidDetails = (props: IBidDetailsProps) => {
           <div className={styles["bidDetails__header"]}>
             <h6>Journey Details</h6>
             <div>
-              <a
-                href="#"
+              <span
                 onClick={(e) => {
                   e.preventDefault();
                   gotoStep(1);
                 }}
-                style={{ textDecoration: "unset" }}
+                style={{ cursor: "pointer", color: "blue" }}
               >
                 Edit
-              </a>
+              </span>
             </div>
           </div>
 
