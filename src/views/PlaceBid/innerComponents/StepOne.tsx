@@ -28,14 +28,16 @@ const StepOne = (props: IStepProps) => {
   const [personCount, setPersonCount] = useState<number>();
 
   const updateData = () => {
-    const submitData = {
-      source: source,
-      destination: destination,
-      carType: carType,
-      personCount: personCount,
-    };
-    updateBidData(submitData);
-    nextStep();
+    if (source && destination && carType) {
+      const submitData = {
+        source: source,
+        destination: destination,
+        carType: carType,
+        personCount: personCount,
+      };
+      updateBidData(submitData);
+      nextStep();
+    }
   };
 
   useEffect(() => {
