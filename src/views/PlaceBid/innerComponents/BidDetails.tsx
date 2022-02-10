@@ -9,13 +9,22 @@ interface IBidDetailsProps {
 
 const BidDetails = (props: IBidDetailsProps) => {
   const { data, currentStep, gotoStep } = props;
-  const { source, destination, carType, personCount } = data;
+  const {
+    source,
+    destination,
+    carType,
+    personCount,
+    amount,
+    fullName,
+    mobileNumber,
+    remarks,
+  } = data;
 
   return currentStep > 1 ? (
     <div className={styles["sectionWrapper"]}>
       <div className={styles["stepContainer"]}>
-        <div className={styles["journeyDetails"]}>
-          <div className={styles["journeyDetails__header"]}>
+        <div className={styles["bidDetails"]}>
+          <div className={styles["bidDetails__header"]}>
             <h6>Journey Details</h6>
             <div>
               <a
@@ -31,7 +40,7 @@ const BidDetails = (props: IBidDetailsProps) => {
             </div>
           </div>
 
-          <div className={styles["journeyDetails__content"]}>
+          <div className={styles["bidDetails__content"]}>
             <p>
               {source} - {destination}
             </p>
@@ -40,7 +49,27 @@ const BidDetails = (props: IBidDetailsProps) => {
             </p>
           </div>
         </div>
-        <br />
+
+        {currentStep > 2 && (
+          <div className={styles["bidDetails"]}>
+            <div className={styles["bidDetails__header"]}>
+              <h6>BID Details</h6>
+            </div>
+            <div className={styles["bidDetails__wrap"]}>
+              <div>
+                <p>+91-{mobileNumber}</p>
+                <p>{fullName}</p>
+                <p>{remarks}</p>
+              </div>
+              <div className={styles["bidDetails__amountSection"]}>
+                <p className={styles["bidDetails__amount"]}>₹{amount}</p>
+                <h6 className={styles["bidDetails__amountType"]}>
+                  Fixed Price
+                </h6>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   ) : (

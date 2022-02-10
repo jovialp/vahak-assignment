@@ -1,0 +1,55 @@
+.otpWrap {
+  .textOtp {
+    display: block;
+    margin: 0 auto;
+    outline: none;
+    padding: 0;
+    width: 250px;
+    border: none;
+    text-align: left;
+    background-image: linear-gradient(
+      to left,
+      rgb(204, 193, 193) 50%,
+      rgba(216, 212, 212, 0) 0%
+    );
+    background-position: bottom;
+    background-repeat: repeat-x;
+
+    @media only screen and (max-width: 320px) {
+      font-size: 28px;
+      line-height: 30px;
+      height: 50px;
+      width: 126px;
+      letter-spacing: 16px;
+      background-size: 32px 1px;
+      background-position-x: 14px;
+    }
+    @media only screen and (min-width: 321px) and (max-width: 480px) {
+      font-size: 50px;
+      line-height: 50px;
+      height: 50px;
+      width: 183px;
+      letter-spacing: 18px;
+      background-size: 47px 1px;
+      background-position-x: 23px;
+    }
+    @media only screen and (min-width: 481px) {
+      font-size: 80px;
+      line-height: 80px;
+      height: 80px;
+      width: 250px;
+      letter-spacing: 18px;
+      background-size: 65px 1px;
+      background-position-x: 35px;
+    }
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+}

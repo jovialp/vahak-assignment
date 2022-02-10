@@ -4,13 +4,13 @@ import Select from "../../../components/Select/Select";
 import Text from "../../../components/Text/Text";
 import styles from "./styles.module.scss";
 
-interface IStepOneProps {
+export interface IStepProps {
   data: IBidData;
   nextStep: any;
   updateBidData: any;
 }
 
-const StepOne = (props: IStepOneProps) => {
+const StepOne = (props: IStepProps) => {
   const { data, nextStep, updateBidData } = props;
 
   const {
@@ -58,25 +58,36 @@ const StepOne = (props: IStepOneProps) => {
       <div className={styles["stepContainer"]}>
         <div>
           <div className={styles["fieldGroup"]}>
-            <Text
-              name="sourceLocation"
-              label="Source Location"
-              onChange={(val: string) => {
-                setSource(val);
-              }}
-              defaultValue={source}
-            />
-
-            <Text
-              name="destination"
-              label="Destination"
-              onChange={(val: string) => {
-                setDestination(val);
-              }}
-              defaultValue={destination}
-            />
+            <div className={styles["fieldGroup__item"]}>
+              <Text
+                name="sourceLocation"
+                label="Source Location"
+                onChange={(val: string) => {
+                  setSource(val);
+                }}
+                defaultValue={source}
+                required={true}
+              />
+            </div>
+            <div className={styles["fieldGroup__item"]}>
+              <Text
+                name="destination"
+                label="Destination"
+                onChange={(val: string) => {
+                  setDestination(val);
+                }}
+                defaultValue={destination}
+                required={true}
+              />
+            </div>
           </div>
+        </div>
 
+        <div
+          style={{
+            marginRight: "20px",
+          }}
+        >
           <Select
             name="carType"
             label="Enter Car Type"
@@ -84,9 +95,9 @@ const StepOne = (props: IStepOneProps) => {
             onChange={(val: string) => {
               setCarType(val);
             }}
-            // defaultValue={source}
+            defaultValue={carTypeOptions.find((el) => el == carType)}
+            required={true}
           />
-
           <Text
             name="travellerCount"
             label="Number of Travelers"
@@ -95,15 +106,15 @@ const StepOne = (props: IStepOneProps) => {
             }}
             defaultValue={personCount}
           />
-
-          <button
-            type="button"
-            onClick={updateData}
-            className={styles["nextButton"]}
-          >
-            Enter Bid Details
-          </button>
         </div>
+
+        <button
+          type="button"
+          onClick={updateData}
+          className={styles["nextButton"]}
+        >
+          Enter Bid Details
+        </button>
       </div>
     </div>
   );

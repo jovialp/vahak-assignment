@@ -9,18 +9,12 @@ const StepFour = (props: any) => {
     <div className={styles["sectionWrapper"]}>
       <div className={styles["stepContainer"]}>
         <div>
-          <div className={styles["fieldGroup"]}>
-            <Text name="sourceLocation" label="Source Location" />
-
-            <Text name="destination" label="Destination" />
-          </div>
-
           <button
-            type="button"
+            type="submit"
             onClick={nextStep}
             className={styles["nextButton"]}
           >
-            StepFour
+            Submit Bid
           </button>
         </div>
       </div>

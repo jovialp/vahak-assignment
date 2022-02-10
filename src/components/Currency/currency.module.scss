@@ -1,0 +1,30 @@
+.currencyWrap {
+  display: flex;
+  justify-content: center;
+  gap: 0px;
+  font-size: 45px;
+  font-weight: 700;
+  padding: 10px 20px;
+  margin: 10px 0 20px;
+  text-align: center;
+
+  .textCurrency {
+    all: unset;
+    border: unset;
+    outline: none;
+    display: flex;
+    font-size: 45px;
+    font-weight: 700;
+    text-align: center;
+    min-width: 25px;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+}

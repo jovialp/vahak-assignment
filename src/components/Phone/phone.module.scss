@@ -1,0 +1,41 @@
+.textContainer {
+  display: block;
+  .textWrap {
+    position: relative;
+    text-align: left;
+
+    .textLabel {
+      position: absolute;
+      top: 25px;
+      left: 10px;
+      font-size: 10px;
+      font-weight: 700;
+      background-color: #fff;
+      padding: 0 5px;
+      color: #797979;
+    }
+    .textCode {
+      position: absolute;
+      top: 41px;
+      left: 10px;
+      font-weight: 700;
+    }
+
+    .textInput {
+      all: unset;
+      border-width: 1px;
+      border-style: inset;
+      border-color: #cccccc;
+      border-image: initial;
+      border-radius: 5px;
+      padding: 10px 10px 10px 55px;
+      margin: 30px 0 0;
+      min-width: 40px;
+      width: calc(100% - 45px);
+      font-weight: 700;
+      &:focus {
+        border-color: #2468fa;
+      }
+    }
+  }
+}

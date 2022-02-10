@@ -12,6 +12,12 @@ export interface IBidData {
   destination: string;
   carType: string;
   personCount?: number;
+  amount?: number;
+  rateNegotiable?: boolean;
+  rateSubmited?: boolean;
+  mobileNumber?: number;
+  fullName: string;
+  remarks?: string;
 }
 
 const PlaceBid = () => {
@@ -22,6 +28,7 @@ const PlaceBid = () => {
     destination: "",
     carType: "",
     personCount: 0,
+    fullName: "",
   });
 
   const updateBidData = (data: any) => {
@@ -32,6 +39,12 @@ const PlaceBid = () => {
       destination: data.destination || bidData.destination,
       carType: data.carType || bidData.carType,
       personCount: data.personCount || bidData.personCount,
+      amount: data.amount || bidData.amount,
+      rateNegotiable: data.rateNegotiable || bidData.rateNegotiable,
+      rateSubmited: data.rateSubmited || bidData.rateSubmited,
+      mobileNumber: data.mobileNumber || bidData.mobileNumber,
+      fullName: data.fullName || bidData.fullName,
+      remarks: data.remarks || bidData.remarks,
     };
     setBidData(updatedData);
   };
@@ -83,10 +96,23 @@ const PlaceBid = () => {
         );
 
       case 2:
-        return <StepTwo nextStep={nextStep} />;
+        return (
+          <StepTwo
+            data={bidData}
+            nextStep={nextStep}
+            updateBidData={updateBidData}
+          />
+        );
 
       case 3:
-        return <StepThree nextStep={nextStep} />;
+        return (
+          <StepThree
+            data={bidData}
+            nextStep={nextStep}
+            updateBidData={updateBidData}
+            gotoStep={gotoStep}
+          />
+        );
 
       case 4:
         return <StepFour nextStep={nextStep} />;
@@ -107,7 +133,7 @@ const PlaceBid = () => {
       initialValues={{}}
       onSubmit={(values, actions) => {
         console.log({ values, actions });
-        alert(JSON.stringify(values, null, 2));
+        alert(JSON.stringify(bidData, null, 2));
         actions.setSubmitting(false);
       }}
     >
